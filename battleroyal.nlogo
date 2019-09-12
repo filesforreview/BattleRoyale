@@ -1,7 +1,7 @@
 ;this code executes simulations of Battle Royale games
 
 ;load packages
-extensions[stats]
+;extensions[stats]
 
 ;define players as the acting agents
 breed [players player]
@@ -63,7 +63,7 @@ to go ;what happens when starting the simulation
 
   if (count players = 1 and ticks > 2)[ ;end of game
     ask one-of players[
-      stats:add skill_rankings (list skill_rank count players) ; add last player to results
+      ;stats:add skill_rankings (list skill_rank count players) ; add last player to results
       set list_nr_encounters insert-item 0 list_nr_encounters nr_encounters ; add last player to results
       set winner_skill_rank skill_rank ;note the true rank of the winner
     ]
@@ -77,7 +77,7 @@ to setup ;when restarting the game (we run this simulation 10000 times for each 
   random-seed behaviorspace-run-number ;set seed for replicability
   clear-all ;clear all variables
   reset-ticks ;restart step counter
-  set skill_rankings stats:newtable ;new table
+  ;set skill_rankings stats:newtable ;new table
   set list_nr_encounters (list) ;new table
 end
 
@@ -159,7 +159,7 @@ to do_move_and_battle
 
       let temp random-float 1
       if temp > winning_chance[   ;attacker dies
-        stats:add skill_rankings (list skill_rank count players) ;add skill and result of player
+        ;stats:add skill_rankings (list skill_rank count players) ;add skill and result of player
         set list_nr_encounters insert-item 0 list_nr_encounters nr_encounters
         set nr_at_died (nr_at_died + 1) ;increase the number of attackers that died
         if advantage = "d" [set nr_worse_positioned (nr_worse_positioned + 1)] ;increase the number of players with position disadvantage that died
@@ -208,7 +208,7 @@ to do_move_and_battle
 
 
          ask encounter[
-           stats:add skill_rankings (list skill_rank count players)
+           ;stats:add skill_rankings (list skill_rank count players)
            set list_nr_encounters insert-item 0 list_nr_encounters nr_encounters
            set nr_def_died (nr_def_died + 1)
            if advantage = "a" [set nr_worse_positioned (nr_worse_positioned + 1)]
@@ -230,10 +230,10 @@ to do_plots ;update netlogo plots
 end
 
 to do_spearman ;compute correlation
-  set correl stats:correlation skill_rankings
+  ;set correl stats:correlation skill_rankings
   ;output-print stats:get-observations skill_rankings 0
   ;output-print stats:get-observations skill_rankings 1
-  set spearman_skill_value item 0 item 1 correl
+  ;set spearman_skill_value item 0 item 1 correl
 end
 
 to do_checks ;debugging assistance
@@ -245,8 +245,8 @@ to do_checks ;debugging assistance
   ;show nr_worse_positioned / nr_players
   ;show "percent better_positioned died:"
   ;show nr_better_positioned / nr_players
-  show "spearman skill & result:"
-  show spearman_skill_value
+  ;show "spearman skill & result:"
+  ;show spearman_skill_value
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
